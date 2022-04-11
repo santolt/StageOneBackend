@@ -11,19 +11,18 @@ namespace StageOneBackend
 
         public static string RemoveSpecialCharacters(string phrase)
         {
-            char[] arrayPhrase = new char[phrase.Length];
-            int index = 0;
+            string newPhrase = string.Empty;
 
-            foreach (char character in phrase)
+            foreach (var character in phrase)
             {
                 if ((character >= '0' && character <= '9') || (character >= 'A' && character <= 'Z')
-                    || (character >= 'a' && character <= 'z'))
+                    || (character >= 'a' && character <= 'z') || (character == '.') || (character == '_') || (character == ' ') || (character == '-') )
                 {
-                    arrayPhrase[index] = character;
-                    index++;
+                    newPhrase += character;
+
                 }
             }
-            return new string(arrayPhrase, 0, index);
+            return newPhrase;
         }
 
         public static void Opcion1()
@@ -33,8 +32,14 @@ namespace StageOneBackend
             Console.Write("Write something and I will retorn without special caracters: ");
             phrase = Console.ReadLine();
 
-            Console.WriteLine(RemoveSpecialCharacters($"Without Special Caracteres: {phrase}"));
-
+            if (RemoveSpecialCharacters(phrase) == string.Empty)
+            {
+                Console.WriteLine("N/a");
+            }
+            else
+            {
+                Console.WriteLine(RemoveSpecialCharacters(phrase));
+            }
         }
     }
 }
